@@ -1,0 +1,63 @@
+
+<div class="col-lg-4 mx-auto text-center" style="margin-top: 80px;">
+
+    <div class="card">
+
+
+        <div style="width: 405px; margin:auto">
+            <form [formGroup]="formNuevoUsuario">
+
+                <div class="form-group">
+                    <label >Nombre</label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre">
+                        <div *ngIf="formNuevoUsuario.controls['nombre'].invalid && formNuevoUsuario.controls['nombre'].dirty" class="alert alert-danger mt-3" role="alert">
+                            <span *ngIf="formNuevoUsuario.controls['nombre'].errors.required">El nombre es requerido</span>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Rol</label>
+                    <select class="form-control" id="rol" formControlName="rol">
+                      <option></option>
+                      <option>COCINERO</option>
+                      <option>BARTENDER</option>
+                      <option>MESERO</option>
+                    </select>
+                    <div *ngIf="formNuevoUsuario.controls['rol'].invalid && formNuevoUsuario.controls['rol'].dirty" class="alert alert-danger mt-3" role="alert">
+                        <span *ngIf="formNuevoUsuario.controls['rol'].errors.required">El rol es requerido</span>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                    <label >Correo</label>
+                    <input type="correo" class="form-control" id="correo" formControlName="correo" placeholder="ejemplo@correo.com">
+                        <div *ngIf="formNuevoUsuario.controls['correo'].invalid && formNuevoUsuario.controls['correo'].dirty" class="alert alert-danger mt-3" role="alert">
+                            <span *ngIf="formNuevoUsuario.controls['correo'].errors.required">El usuario o correo es requerido</span>
+                            <span *ngIf="formNuevoUsuario.controls['correo'].errors.correo">El correo es inválido</span>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label >Contraseña</label>
+                    <input type="password" (keyUp.enter)="crearUsuario()" class="form-control" id="password" formControlName="password">
+                        <div *ngIf="formNuevoUsuario.controls['password'].invalid && formNuevoUsuario.controls['password'].dirty" class="alert alert-danger mt-3" role="alert">
+                            <span *ngIf="formNuevoUsuario.controls['password'].errors.required">La contraseña es requerida</span>
+                        </div>
+                </div>
+                <button [disabled]="!formNuevoUsuario.valid" type="submit" class="btn btn-primary" (click)="crearUsuario()">Registrar</button>
+            
+
+            </form>
+                <div *ngIf="!datosCorrectos" class="alert alert-warning mt-3" role="alert">
+                    {{ textError }}
+                </div>
+
+                <!-- <ngx-spinner  size = "large" color = "#cbe31f" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner> -->
+
+                <!-- <button type="button" class="btn btn-outline-secondary"  data-toggle="modal" data-target="#exampleModalCenter"
+                (click)="resetPassword()">Olvidé mi contraseña</button> -->
+                
+        </div>
+
+    </div>
+</div>

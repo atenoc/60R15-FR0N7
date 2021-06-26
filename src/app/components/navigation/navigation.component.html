@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="z-index: 2;">
+
+  <div class="container">
+
+      <a class="navbar-brand" routerLink="/">Goris
+
+        <img src="https://res.cloudinary.com/dnblt4j16/image/upload/v1622735207/gorichelas/Logo-Gorichelas_lhkrei.jpg"  class="rounded-circle" 
+        alt="" height="30px">
+      
+      </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/carta/mesa', this.ordenService.orden.noMesa]">Carta</a>
+          </li>
+
+          <li *ngIf="!user" 
+                class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/orden">Mi Orden 
+              <span class="rounded orden"> {{ this.ordenService.orden.detalleOrden.length }}  </span>
+              <span class="total-orden"> 
+                {{ this.ordenService.orden.totalOrden == 0 ? ' ' : this.ordenService.orden.totalOrden | currency }}
+              </span>
+            </a> 
+          </li> 
+        <!--
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/orden">Orden</a>
+          </li> -->
+
+          <li *ngIf="user" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes">Ordenes</a>
+          </li>
+        
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/caja">Caja</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/usuarios">Usuarios</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/productos">Productos</a>
+          </li>
+
+      </ul>
+      <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
+      <div class=" nav-item" >
+        <div *ngIf="user" >
+          <!-- <img [src]="user.photoURL" class="rounded-circle" alt="" height="35px">  -->
+          <div style="float: left; margin-top: 8px;">
+            <label style="color:#c6c6c6; font-size: 8pt; position: absolute; margin-top: 14px;">ROL: {{ rolUsuario}}</label>
+            <label style="color:#c6c6c6; font-size: 9pt; float: left;">Usuario: {{ nombreEmail }} </label>
+          </div>
+          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="logout()" style="margin-left: 10px;">Cerrar Sesión</button>
+        </div>
+        <div *ngIf="!user">
+          <button class="btn btn-outline-warning my-2 my-sm-0" routerLink="/login">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</nav>

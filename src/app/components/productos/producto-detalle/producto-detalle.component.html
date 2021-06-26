@@ -1,0 +1,48 @@
+
+<div class="row" *ngIf="!producto; else main_content">
+    <h1>Loading...</h1>
+</div>
+<ng-template #main_content>
+    <div class="row" style="margin-top: 80px;">
+        <div class="col-md-5">
+            <div class="card">
+                <img [src]="'http://localhost:4000/' + producto.imagenPath" class="img-card-top w-100">
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <form class="card-body" (submit)="updateProducto(nombre, categoria, descripcion, precio)">
+                    <div class="form-group">
+                        <small class="form-text text-muted">Nombre del producto </small>
+                        <input type="text" class="form-control" placeholder="Nombre" [value]="producto.nombre" #nombre>
+                    </div>
+                    <div class="form-group">
+                        <small class="form-text text-muted">Categoria: </small>
+                    <select class="form-control" id="categoria" [value]="producto.categoria" required #categoria>
+                        <option>SNACKS</option>
+                        <option>TACOS</option>
+                        <option>TORTAS</option>
+                        <option>BEBIDAS</option>
+                        <option>JUGOS</option>
+                        <option>REFRESCOS</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <small class="form-text text-muted">Descripción </small>
+                        <textarea rows="2" class="form-control" placeholder="Descripción" [value]="producto.descripcion" #descripcion></textarea>
+                    </div>
+                    <div class="form-group">
+                        <small class="form-text text-muted">Precio $</small>
+                        <textarea rows="2" class="form-control" placeholder="Precio" [value]="producto.precio" #precio></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        Actualizar Producto
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-danger m-3" (click)="deleteProducto(producto._id)">Eliminar Producto</button>
+
+</ng-template>

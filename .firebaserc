@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "prueba-ed0d7": {
+      "hosting": {
+        "angular-front-productos": [
+          "prueba-ed0d7"
+        ]
+      }
+    }
+  }
+}

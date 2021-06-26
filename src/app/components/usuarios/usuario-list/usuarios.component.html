@@ -1,0 +1,36 @@
+<div class="container" style="margin-top: 80px;">
+
+    <div *ngIf="user">
+        <button class="btn btn-outline-primary mb-3" (click)="agregarUsuario()">Agregar Usuario</button>
+    </div>
+
+    <h5>Lista de Usuarios</h5>
+
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 p-4" *ngFor="let usuario of usuarios?.reverse()">
+            <div>
+                <div class="card-header">
+                    <div data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        <img src="https://res.cloudinary.com/dnblt4j16/image/upload/v1622820116/gorichelas/126794_bfxby4.png" 
+                            width="30" style="float: right; cursor: pointer;" (click)="selectedUser(usuario._id)">
+                    </div>
+                    <p><strong>id:</strong> {{usuario._id}}</p>
+                    <p><strong>Nombre:</strong> {{usuario.nombre}}</p>
+                    <p><small>Correo: {{usuario.correo}}</small></p> 
+                    <p><small>Rol: {{usuario.rol}}</small></p>
+                    <div data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                        <img src="https://res.cloudinary.com/dnblt4j16/image/upload/v1622826999/gorichelas/delete_vl6xld.png" 
+                            width="30" style="float: right; cursor: pointer;" (click)="deleteUser(usuario._id)">
+                    </div>
+                </div>
+                <div class="card-header">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="container" style="margin-top: 80px;">
+
+    <div *ngIf="!usuario; else main_content">
+        <h1>Loading...</h1>
+    </div>
+    <ng-template #main_content>
+    
+        <div class="container mt-5 mb-5">
+    
+            <form class="card-body" (submit)="actualizarUsuario(nombre, correo, rol)">
+                <div class="form-group">
+                    <small class="form-text text-muted">Nombre </small>
+                    <input type="text" class="form-control" placeholder="Nombre" [value]="usuario.nombre" #nombre>
+                </div>
+
+                <div class="form-group">
+                    <small class="form-text text-muted">Correo </small>
+                    <input type="text" class="form-control" [value]="usuario.correo" readonly #correo>
+                </div>
+                
+                <div class="form-group">
+                    <small class="form-text text-muted">Nuevo Rol</small>
+                    <select class="form-control" id="rol" [value]="usuario.rol" #rol>
+                        <option>Cocinero</option>
+                        <option>Bartender</option>
+                        <option>Mesero</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary btn-block">
+                    Actualizar Datos
+                </button>
+            </form>
+        
+        </div>
+    </ng-template>
+
+</div>
+
+            
+  
+    
+    

@@ -1,0 +1,183 @@
+
+<div class="fixed-top" style="color: white; position: fixed; width: 100%; background-color: #ffc107; z-index: 1; height: 40pt; margin-top: 55px;">
+    <div class="container">
+      <div class="row p-2">
+        <div class="col-9">
+          <div id="buscador" >
+            <form action="">
+              <input type="text" class="form-control" placeholder="Buscar por nombre:" (input)="buscarProductos($event.target.value)">
+          </form>
+          </div>
+        </div>
+  
+        <div class="col-3 bg-dark" style="border-radius: 5px;">
+          <table style=" margin-top: 9px; margin-left: -10px;">
+              <th style="width: 10%;"><div class="orden">{{ this.ordenService.orden.detalleOrden.length }}</div></th>
+              <th style="width: 50%;"><div class="total-orden">{{ this.ordenService.orden.totalOrden == 0 ? ' ' : this.ordenService.orden.totalOrden | currency }}</div></th>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 120px;">
+
+    <div *ngIf="mostrarProductosFiltrados">
+        <div class="alert" style="background-color: #ffc107;"><strong>Resultados...</strong></div>
+        <div class="row mb-5">
+            <div class="col-md-3" *ngFor="let filtro of productosFiltro?.reverse()">
+                <div class="card" >
+                    <div class="card-header" style="background-color: #fcd04d;">
+                        <strong>{{filtro.nombre}}</strong>
+                    </div>
+                    <img [src]="'http://localhost:4000/' + filtro.imagenPath" class="img-card-top w-100">
+                    <div class="card-body" style="background-color: #f6f1e8;">
+                        <strong>{{filtro.precio | currency}} MXN</strong>
+                        <p><small>{{filtro.descripcion}}</small></p>
+                        <div class="text-center">
+                            <button (click)="agregarProducto(filtro)" class="btn btn-warning" >Agregar a mi órden</button>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!mostrarProductosFiltrados">
+
+    <div *ngIf="mostrarSnacks">
+    <div class="alert" style="background-color: #ffc107;"><strong>*** SNACKS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let snack of snacks?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: #fcd04d;">
+                    <strong>{{snack.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + snack.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #f6f1e8;">
+                    <strong>{{snack.precio | currency}} MXN</strong>
+                    <p><small>{{snack.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(snack)" class="btn btn-warning" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="mostrarTacos">
+    <div class="alert" style="background-color: #ffc107;"><strong>*** TACOS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let taco of tacos?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: #fcd04d;">
+                    <strong>{{taco.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + taco.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #f6f1e8;">
+                    <strong>{{taco.precio | currency}} MXN</strong>
+                    <p><small>{{taco.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(taco)" class="btn btn-warning" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="mostrarTortas">
+    <div class="alert" style="background-color: #ffc107;"><strong>*** TORTAS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let torta of tortas?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: #fcd04d;">
+                    <strong>{{torta.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + torta.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #f6f1e8;">
+                    <strong>{{torta.precio | currency}} MXN</strong>
+                    <p><small>{{torta.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(torta)" class="btn btn-warning" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="mostrarBebidas">
+    <div class="alert" style="background-color: #6ddddd;"><strong>*** BEBIDAS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let bebida of bebidas?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: paleturquoise;">
+                    <strong>{{bebida.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + bebida.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #eef8f8;">
+                    <strong>{{bebida.precio | currency}} MXN</strong>
+                    <p><small>{{bebida.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(bebida)" class="btn btn-outline-primary" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="mostrarJugos">
+    <div class="alert" style="background-color: #6ddddd;"><strong>*** JUGOS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let jugo of jugos?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: paleturquoise;">
+                    <strong>{{jugo.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + jugo.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #eef8f8;">
+                    <strong>{{jugo.precio | currency}} MXN</strong>
+                    <p><small>{{jugo.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(jugo)" class="btn btn-outline-primary" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="mostrarRefrescos">
+    <div class="alert" style="background-color: #6ddddd;"><strong>*** REFRESCOS ***</strong></div>
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let refresco of refrescos?.reverse()">
+            <div class="card" >
+                <div class="card-header" style="background-color: paleturquoise;">
+                    <strong>{{refresco.nombre}}</strong>
+                </div>
+                <img [src]="'http://localhost:4000/' + refresco.imagenPath" class="img-card-top w-100">
+                <div class="card-body" style="background-color: #eef8f8;">
+                    <strong>{{refresco.precio | currency}} MXN</strong>
+                    <p><small>{{refresco.descripcion}}</small></p>
+                    <div class="text-center">
+                        <button (click)="agregarProducto(refresco)" class="btn btn-outline-primary" >Agregar a mi órden</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+</div>

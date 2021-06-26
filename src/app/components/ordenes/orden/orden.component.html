@@ -1,0 +1,50 @@
+<div class="container" style="margin-top: 80px;">
+
+    <div class="alert" style="background-color: #6ddddd;">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <span><strong>Número de Órden: </strong>{{orden.noOrden}}</span>
+            </div>
+            <div class="col-md-3">
+                <span><strong>Número de Mesa: </strong>{{orden.noMesa}}</span>
+            </div>
+            <div class="col-md-3">
+                <span><strong>Cliente: </strong>{{orden.nombreCliente}}</span>
+            </div>
+            <div class="col-md-3">
+                <span><strong>Total a Pagar: </strong>{{orden.totalOrden | currency}} MXN</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-2">
+    <table class="rounded">
+        <thead>
+            <tr>
+            <!-- <th scope="col">ID Producto:</th> -->
+            <td scope="col">Nombre: </td>
+            <td scope="col">Cantidad: </td>
+            <td scope="col">Precio: </td>
+            <td scope="col">Total: </td>
+            <td scope="col">Opción: </td>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor="let detalle of orden.detalleOrden; let posicion = index">
+            <!-- <td>{{detalle.idProducto}}</td> -->
+            <th>{{detalle.nombre}}</th>
+
+            <td> <input (input)="calcularCantidad(posicion)" [(ngModel)]="detalle.cantidad" class="form-control" type="number" > </td>
+            <td>{{detalle.precio | currency}}</td>
+            <td><strong>{{detalle.total | currency}}</strong></td>
+            <td> <button class="btn btn-danger" (click)="eliminar(posicion)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="text-center">
+        <button (click)="guardarOrden()" class="btn btn-primary ">Ordenar</button>
+    </div>
+
+</div>

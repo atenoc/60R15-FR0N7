@@ -1,0 +1,91 @@
+    <div *ngIf="!user">
+        
+      <div class="col-lg-4 mx-auto text-center mt-3">
+
+        <img src="https://res.cloudinary.com/dnblt4j16/image/upload/v1622735207/gorichelas/Logo-Gorichelas_lhkrei.jpg" alt="" height="100px">
+        <h3>Iniciar Sesión</h3>
+
+        <div class="card p-3">
+
+                <form [formGroup]="formLogin">
+                    <div class="form-group">
+                        <label >Correo</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                            <div *ngIf="formLogin.controls['email'].invalid && formLogin.controls['email'].dirty" class="alert alert-danger mt-3" role="alert">
+                                <span *ngIf="formLogin.controls['email'].errors.required">El usuario o email es requerido</span>
+                                <span *ngIf="formLogin.controls['email'].errors.email">El correo es inválido</span>
+                            </div>
+                    </div>
+    
+                    <div class="form-group">
+                        <label >Contraseña</label>
+                        <input type="password" (keyUp.enter)="ingresar()" class="form-control" id="password" formControlName="password">
+                            <div *ngIf="formLogin.controls['password'].invalid && formLogin.controls['password'].dirty" class="alert alert-danger mt-3" role="alert">
+                                <span *ngIf="formLogin.controls['password'].errors.required">La contraseña es requerida</span>
+                            </div>
+                    </div>
+                    <button [disabled]="!formLogin.valid" type="submit" class="btn btn-primary" (click)="ingresar()">Ingresar</button>
+                
+                </form>
+                    <div *ngIf="!datosCorrectos" class="alert alert-warning mt-3" role="alert">
+                        {{ textError }}
+                    </div>
+    
+                    <!-- <ngx-spinner  size = "large" color = "#cbe31f" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner> -->
+
+                    <!-- <button type="button" class="btn btn-outline-secondary"  data-toggle="modal" data-target="#exampleModalCenter"
+                    (click)="resetPassword()">Olvidé mi contraseña</button> -->
+
+                    <button type="button" class="btn btn-link"  data-toggle="modal" data-target="#exampleModalCenter">Olvide mi contraseña</button>
+                    
+            
+    
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+  <!-- 
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>
+  -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Recuperar Contraseña</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+          <form (submit)="resetearPassword(correo)">
+            <div class="form-group">
+                <small class="form-text text-muted">Escribe tu correo electronico </small>
+                <input type="text" class="form-control" placeholder="ejemplo@correo.com" required #correo>
+            </div>
+            <button class="btn btn-primary btn-block">Enviarme un correo</button>
+
+          </form>
+
+        </div>
+        <!-- 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+ 
+
+
+

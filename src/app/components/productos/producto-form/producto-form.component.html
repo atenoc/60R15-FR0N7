@@ -1,0 +1,49 @@
+<div class="container mb-5" style="margin-top: 80px;">
+
+<div class="col-lg-5 mx-auto">
+
+    <div class="card">
+        <div class="card-header">Nuevo Producto a la Carta</div>
+        <div class="card-body">
+
+            <form (submit)="subirFoto(nombre, categoria, descripcion, precio)">
+                <div class="form-group">
+                    <small class="form-text text-muted">Nombre del producto </small>
+                    <input type="text" class="form-control" placeholder="P. ej. Torta Hawaiana" required #nombre>
+                </div>
+                <div class="form-group">
+                    <small class="form-text text-muted">Categoria: </small>
+                    <select class="form-control" id="rol" required #categoria>
+                        <option></option>
+                        <option>SNACKS</option>
+                        <option>TACOS</option>
+                        <option>TORTAS</option>
+                        <option>BEBIDAS</option>
+                        <option>JUGOS</option>
+                        <option>REFRESCOS</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <small class="form-text text-muted">Descripción </small>
+                    <textarea  rows="2" class="form-control" placeholder="P. ej. Jamón, queso y piña" required #descripcion></textarea>
+                </div>
+                <div class="form-group">
+                    <small class="form-text text-muted">Precio $</small>
+                    <input type="text" class="form-control" placeholder="0" required #precio>
+                </div>
+                <div class="form-group">
+                    <small class="form-text text-muted">Da clic sobre la imágen para seleccionar una: </small>
+                    <input type="file" class="d-none" #fotoInput (change)="fotoSeleccionada($event)">
+                    <img [src]="photoSelected || 'assets/images/no-image.png'" (click)="fotoInput.click()" class="img-fluid" style="height: 150px;">
+                </div>
+
+                <button class="btn btn-primary btn-block">Guardar Producto</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</div>

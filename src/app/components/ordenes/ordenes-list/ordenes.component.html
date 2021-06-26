@@ -1,0 +1,23 @@
+<div class="container" style="margin-top: 80px;">
+
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let orden of listadoOrdenes">
+            <div class="card border-success mb-3" >
+                <div class="card-header">No. Orden: {{ orden.noOrden}}</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">No. Mesa: {{orden.noMesa}}</h5>
+      
+                      <ul style="list-style-type:none;">
+                          <li *ngFor="let detalle of orden.detalleOrden">
+                              <span class="badge badge-success badge-pill">{{ detalle.cantidad }}</span>
+                              {{ detalle.nombre }}   
+                          </li>
+                      </ul>  
+       
+                  </div>
+                  <div class="card-footer bg-transparent border-success">Estatus: {{ orden.estatus}}</div>
+            </div>
+        </div>
+    </div>
+
+</div>
