@@ -29,26 +29,35 @@ export class UsuarioFormComponent implements OnInit {
   crearUsuario(){
 
     if(this.formNuevoUsuario.valid){
+      /*
       console.log("El nombre es: "+ this.formNuevoUsuario.value.nombre)
       console.log("El rol es: "+ this.formNuevoUsuario.value.rol)
       console.log("El correo es: "+ this.formNuevoUsuario.value.correo)
       console.log("El password es: "+ this.formNuevoUsuario.value.password)
+      */
 
       /* Primero se guarda el usuario en Firebase Auth*/ 
-      this.afAuth.auth.createUserWithEmailAndPassword(this.formNuevoUsuario.value.correo, this.formNuevoUsuario.value.password);
+      let originalUser = this.afAuth.auth.currentUser
+      //console.log("Original User: " + JSON.stringify(originalUser))
+      this.afAuth.auth.createUserWithEmailAndPassword(this.formNuevoUsuario.value.correo, this.formNuevoUsuario.value.password)
+      .then(() => {
+        this.afAuth.auth.updateCurrentUser(originalUser)
+        console.log("Usuario restaurado")
+       });
+       //console.log("Auctual user:" + JSON.stringify(this.afAuth.auth.currentUser))
+      //
 
       /* Se guarda el usuario en la base de datos local */
       this.usuarioService.createUsuario(this.formNuevoUsuario.value.nombre, this.formNuevoUsuario.value.correo, this.formNuevoUsuario.value.rol)
       .subscribe(
         res => {
-          console.log(res)
-          this.router.navigate(['/usuarios'])
-          console.log("Usuario Registrado correctamente")
+          console.log("respuesta registro: " + res)
       }, 
         err => {
           console.log(err)
       });
 
+      this.router.navigate(['/usuarios'])
       
     }else{
       this.textError = 'Verifica tus datos'
