@@ -10,14 +10,23 @@
                       <ul style="list-style-type:none;">
                           <li *ngFor="let detalle of orden.detalleOrden">
                               <span class="badge badge-success badge-pill">{{ detalle.cantidad }}</span>
-                              {{ detalle.nombre }}   
+                              {{ detalle.nombre }}  <!-- <label style="color: red;"> {{detalle.categoria}} </label>  -->
                           </li>
                       </ul>  
        
                   </div>
-                  <div class="card-footer bg-transparent border-success">Estatus: {{ orden.estatus}}</div>
+                  <div class="card-footer bg-transparent border-success">Estatus: <span style="color: orange;">{{ orden.estatus}}</span></div>
+                  <button *ngIf="rolUsuario==='COCINERO'" (click)="liberarDeCocina(orden)" class="btn btn-warning">Liberar </button>
+                  <button *ngIf="rolUsuario==='BARTENDER'" (click)="liberarDeBarra(orden)" class="btn btn-primary">Liberar </button>
+                  
+                  <div *ngIf="rolUsuario==='MESERO'">
+                      <!--
+                    <span style="color: green;" *ngIf="orden.en_cocina === 'PREPARADO'"> Cocina: Listo</span> 
+                    <span style="color: red;" *ngIf="orden.en_barra === 'PREPARADO'"> Barra: Listo</span>  -->
+                    <button *ngIf="orden.en_cocina === 'PREPARADO' && orden.en_barra === 'PREPARADO'" class="btn btn-danger">Marcar como SERVIDA</button>
+                  </div>
             </div>
         </div>
-    </div>
+    </div>    
 
 </div>

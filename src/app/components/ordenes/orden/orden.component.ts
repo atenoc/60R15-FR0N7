@@ -35,10 +35,31 @@ export class OrdenComponent implements OnInit {
 
   guardarOrden(){
 
+    /* validar si el datalle de la orden trae al menos una COMIDA / BEBIDA */
+    let noComidas = this.ordenService.orden.detalleOrden.filter(t => t.tipo_producto === "COMIDA").length
+    console.log("noComida: "+ noComidas)
+    let noBebidas = this.ordenService.orden.detalleOrden.filter(t => t.tipo_producto === "BEBIDA").length
+    console.log("noBebidas: "+ noBebidas)
+
+    if(noComidas > 0){
+      this.ordenService.orden.en_cocina = "SI"
+    }else{
+      this.ordenService.orden.en_cocina = "PREPARADO"
+    }
+    if(noBebidas > 0){
+      this.ordenService.orden.en_barra = "SI"
+    }else{
+      this.ordenService.orden.en_barra = "PREPARADO"
+    }
+
+
     this.ordenService.createOrden(
       this.ordenService.orden.noMesa,
       this.ordenService.orden.nombreCliente,
+      this.ordenService.orden.en_cocina,
+      this.ordenService.orden.en_barra,
       this.ordenService.orden.detalleOrden
+
       ).subscribe(
         res => {
           console.log(res)

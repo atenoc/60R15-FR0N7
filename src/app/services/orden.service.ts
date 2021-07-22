@@ -53,8 +53,8 @@ export class OrdenService {
 
   /** Rest Apis */
 
-  createOrden(noMesa: number, nombreCliente: string, detalleOrden:Array<DetalleOrden>){
-    return this.http.post(`${this.URI}`, {noMesa,nombreCliente,detalleOrden });  
+  createOrden(noMesa: number, nombreCliente: string, en_cocina:string, en_barra:string, detalleOrden:Array<DetalleOrden>){
+    return this.http.post(`${this.URI}`, {noMesa,nombreCliente, en_cocina, en_barra, detalleOrden });  
   }
 
   getOrdenes() {
@@ -68,9 +68,13 @@ export class OrdenService {
   deleteOrden(id: string) {
     return this.http.delete(`${this.URI}/${id}`);
   }
+  /* old
+  updateOrden(id: string, estatus: string, en_cocina: string, en_barra: string, detalleOrden: Array<DetalleOrden>) {
+    return this.http.put(`${this.URI}/${id}`, {estatus, en_cocina, en_barra, detalleOrden});
+  }*/
 
-  updateOrden(id: string, estatus: string, detalleOrden: Array<DetalleOrden>) {
-    return this.http.put(`${this.URI}/${id}`, {estatus, detalleOrden});
+  updateOrden(id: string, estatus: string, en_cocina: string, en_barra: string) {
+    return this.http.put(`${this.URI}/${id}`, {estatus, en_cocina, en_barra});
   }
 
 }
