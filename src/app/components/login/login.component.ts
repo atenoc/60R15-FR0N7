@@ -18,9 +18,10 @@ export class LoginComponent implements OnInit {
   formLogin:FormGroup
   datosCorrectos:boolean = true
   textError:string =''
+  rolUsuario:string
 
   constructor( private formB: FormBuilder, private afAuth: AngularFireAuth, 
-      private spinner: NgxSpinnerService, private router: Router) { 
+      private spinner: NgxSpinnerService, private router: Router, private usuarioService: UsuarioService) { 
     
   }
 
@@ -37,7 +38,46 @@ export class LoginComponent implements OnInit {
     this.afAuth.user.subscribe((usuario)=>{
       this.user=usuario
       if(this.user){
-        this.router.navigate(['/productos'])
+
+        // validamos el rol del usuario logueado  
+        this.usuarioService.getUsuarioXcorreo(this.user.email)
+        .subscribe(
+          res => {
+
+            if(res){
+              let objeto = JSON.stringify(res)
+              var stringify = JSON.parse(objeto);
+            
+              for (var i = 0; i < stringify.length; i++) {
+                  //console.log("stringify rol: " + stringify[i]['rol']);
+                  this.rolUsuario = stringify[i]['rol'];
+                  console.log("Rol Usuario: " + this.rolUsuario)
+              }
+
+            }else{
+              this.rolUsuario = "ADMINISTRADOR";
+              console.log("Rol: " + this.rolUsuario)
+            }
+
+            if(this.rolUsuario === "ADMINISTRADOR"){
+              this.router.navigate(['/ordenes'])
+            }else if(this.rolUsuario === "BARTENDER"){
+              this.router.navigate(['/ordenes-barra'])
+            }
+            else if(this.rolUsuario === "COCINERO"){
+              this.router.navigate(['/ordenes-cocina'])
+            }
+            else if(this.rolUsuario === "MESERO"){
+              this.router.navigate(['/ordenes-mesero'])
+            }
+            
+            
+            
+        }, 
+          err => {
+            console.log(err)
+        }); 
+
       }else{
         console.log("¡Sin sesión!")
       }

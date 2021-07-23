@@ -15,11 +15,18 @@
                       </ul>  
        
                   </div>
-                  <div class="card-footer bg-transparent border-success">Estatus: <span style="color: orange;">{{ orden.estatus}}</span></div>
+                  <div class="card-footer bg-transparent border-success">
+                      <div *ngIf="orden.estatus === 'ORDENADO' ">
+                        <small> Estatus: </small><span style="color: orange;">{{ orden.estatus}}</span>
+                      </div>
+                      <div *ngIf="orden.estatus === 'PREPARADO' ">
+                        <small> Estatus: </small><span style="color: #28a745;"><strong> {{ orden.estatus}} </strong></span>
+                      </div> 
+                  </div>
                   <!-- 
                     <span style="color: green;" *ngIf="orden.en_cocina === 'PREPARADO'"> Cocina: Listo</span> 
                     <span style="color: green;" *ngIf="orden.en_barra === 'PREPARADO'"> Barra: Listo</span> -->
-                    <button *ngIf="orden.en_cocina === 'PREPARADO' && orden.en_barra === 'PREPARADO'" class="btn btn-danger">Marcar como SERVIDA</button>
+                    <button *ngIf="orden.estatus === 'PREPARADO' " class="btn btn-danger"> <small> Marcar como </small>SERVIDA</button>
                   
             </div>
         </div>

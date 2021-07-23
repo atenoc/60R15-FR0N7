@@ -60,7 +60,10 @@ export class OrdenesListBarraComponent implements OnInit {
                 for (let orden of res) {
                   this.listaDetalleOrdenTmp = orden.detalleOrden.filter(x => x.tipo_producto === "BEBIDA")
                   orden.detalleOrden = this.listaDetalleOrdenTmp
-                  this.listadoOrdenes.push(orden)
+                  
+                  if(orden.estatus === "ORDENADO"){
+                    this.listadoOrdenes.push(orden)
+                  }
                   this.listadoOrdenes = this.listadoOrdenes.filter(o => o.en_barra === "SI")
                 }
               })
@@ -85,6 +88,15 @@ export class OrdenesListBarraComponent implements OnInit {
     .subscribe(res => {
       this.router.navigate(['/ordenes-barra']);
       //this.router.navigateByUrl('/ordenes-barra')
+
+      this.ordenService.getOrden(orden._id).subscribe(res => {
+        if(res.en_barra === "PREPARADO" && res.en_cocina === "PREPARADO"){
+          this.ordenService.updateOrden(orden._id, "PREPARADO", orden.en_cocina, orden.en_barra)
+          .subscribe(res => {
+          })
+        }
+      })
+
     });
   }
 

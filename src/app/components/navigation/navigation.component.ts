@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   //mostrarMiOrden:boolean = false
 
   constructor(private afAuth: AngularFireAuth, private spinner: NgxSpinnerService, 
-    private router: Router, public ordenService:OrdenService, private usuarioService: UsuarioService) {}
+    private router: Router, private ordenService:OrdenService, private usuarioService: UsuarioService) {}
 
   ngOnInit() {
 

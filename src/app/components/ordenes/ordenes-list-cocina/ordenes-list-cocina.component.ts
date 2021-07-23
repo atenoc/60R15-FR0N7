@@ -60,7 +60,10 @@ export class OrdenesListCocinaComponent implements OnInit {
                 for (let orden of res) {
                   this.listaDetalleOrdenTmp = orden.detalleOrden.filter(x => x.tipo_producto === "COMIDA")
                   orden.detalleOrden = this.listaDetalleOrdenTmp
-                  this.listadoOrdenes.push(orden)
+
+                  if(orden.estatus === "ORDENADO"){
+                    this.listadoOrdenes.push(orden)
+                  }
                   this.listadoOrdenes = this.listadoOrdenes.filter(o => o.en_cocina === "SI")
                 }
               })
@@ -87,9 +90,18 @@ export class OrdenesListCocinaComponent implements OnInit {
     console.log("Id: "+orden._id)
     this.ordenService.updateOrden(orden._id, orden.estatus, "PREPARADO", orden.en_barra)
     .subscribe(res => {
-      console.log("Respuesta: "+ res);
+      console.log("actualizado: "+ JSON.stringify(res));
       this.router.navigate(['/ordenes-cocina']);
       //this.router.navigateByUrl('/ordenes')
+
+      this.ordenService.getOrden(orden._id).subscribe(res => {
+        if(res.en_barra === "PREPARADO" && res.en_cocina === "PREPARADO"){
+          this.ordenService.updateOrden(orden._id, "PREPARADO", orden.en_cocina, orden.en_barra)
+          .subscribe(res => {
+          })
+        }
+      })
+
     });
   }
 
