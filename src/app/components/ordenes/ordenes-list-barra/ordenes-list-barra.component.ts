@@ -7,33 +7,30 @@ import { OrdenService } from 'src/app/services/orden.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-ordenes',
-  templateUrl: './ordenes.component.html',
-  styleUrls: ['./ordenes.component.css']
+  selector: 'app-ordenes-list-barra',
+  templateUrl: './ordenes-list-barra.component.html',
+  styleUrls: ['./ordenes-list-barra.component.css']
 })
-export class OrdenesComponent implements OnInit {
+export class OrdenesListBarraComponent implements OnInit {
 
   listadoOrdenes:Orden[] =  new Array<Orden>()
-
   rolUsuario:string
-  //listadoOrdenesTmp:Orden[] =  new Array<Orden>()
   listaDetalleOrdenTmp:DetalleOrden[] =  new Array<DetalleOrden>()
 
   constructor(
     private afAuth: AngularFireAuth, 
     private usuarioService: UsuarioService, 
     private ordenService: OrdenService,
-    private router: Router) { 
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    }
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   }
 
   ngOnInit() {
-
     this.afAuth.user.subscribe((usuario)=>{
       if(usuario){
 
         //validamos el rol del usuario logueado  
-
         this.usuarioService.getUsuarioXcorreo(usuario.email)
         .subscribe(
           res => {
@@ -54,17 +51,21 @@ export class OrdenesComponent implements OnInit {
 
             //Mostramos ordenes de acuerdo al perfil
 
-            if(this.rolUsuario==="ADMINISTRADOR"){
-
+            if(this.rolUsuario==="BARTENDER"){
+              console.log("BARTENDER")
+              
               this.ordenService.getOrdenes()
               .subscribe(res => {
-
-                this.listadoOrdenes = res
               
+                for (let orden of res) {
+                  this.listaDetalleOrdenTmp = orden.detalleOrden.filter(x => x.tipo_producto === "BEBIDA")
+                  orden.detalleOrden = this.listaDetalleOrdenTmp
+                  this.listadoOrdenes.push(orden)
+                  this.listadoOrdenes = this.listadoOrdenes.filter(o => o.en_barra === "SI")
+                }
               })
             }
-   
-            
+    
         }, 
           err => {
             console.log(err)
@@ -76,19 +77,15 @@ export class OrdenesComponent implements OnInit {
         console.log("¡Sin sesión!")
       }
     })
-
-  }
-
-  get ordenesLocalStorage(): Orden[]{
-    let ordenes: Orden[] =  JSON.parse(localStorage.getItem("ordenes"))
-    if(ordenes ==  null){
-      return new Array<Orden>();
-    }
-    return ordenes
   }
 
 
-
-
+  liberarDeBarra(orden:Orden){
+    this.ordenService.updateOrden(orden._id, orden.estatus, orden.en_cocina, "PREPARADO")
+    .subscribe(res => {
+      this.router.navigate(['/ordenes-barra']);
+      //this.router.navigateByUrl('/ordenes-barra')
+    });
+  }
 
 }

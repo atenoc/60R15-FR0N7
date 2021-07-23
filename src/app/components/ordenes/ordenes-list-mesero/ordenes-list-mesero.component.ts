@@ -7,16 +7,14 @@ import { OrdenService } from 'src/app/services/orden.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-ordenes',
-  templateUrl: './ordenes.component.html',
-  styleUrls: ['./ordenes.component.css']
+  selector: 'app-ordenes-list-mesero',
+  templateUrl: './ordenes-list-mesero.component.html',
+  styleUrls: ['./ordenes-list-mesero.component.css']
 })
-export class OrdenesComponent implements OnInit {
+export class OrdenesListMeseroComponent implements OnInit {
 
   listadoOrdenes:Orden[] =  new Array<Orden>()
-
   rolUsuario:string
-  //listadoOrdenesTmp:Orden[] =  new Array<Orden>()
   listaDetalleOrdenTmp:DetalleOrden[] =  new Array<DetalleOrden>()
 
   constructor(
@@ -24,7 +22,7 @@ export class OrdenesComponent implements OnInit {
     private usuarioService: UsuarioService, 
     private ordenService: OrdenService,
     private router: Router) { 
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
   ngOnInit() {
@@ -54,41 +52,33 @@ export class OrdenesComponent implements OnInit {
 
             //Mostramos ordenes de acuerdo al perfil
 
-            if(this.rolUsuario==="ADMINISTRADOR"){
-
+            if(this.rolUsuario==="MESERO"){
               this.ordenService.getOrdenes()
               .subscribe(res => {
 
                 this.listadoOrdenes = res
-              
+              /*
+                for (let orden of res) {
+                  this.listaDetalleOrdenTmp = orden.detalleOrden.filter(x => x.tipo_producto === "BEBIDA")
+                  orden.detalleOrden = this.listaDetalleOrdenTmp
+                  this.listadoOrdenes.push(orden)
+                  this.listadoOrdenes = this.listadoOrdenes.filter(o => o.en_barra === "SI")
+                }*/
               })
             }
-   
-            
+    
         }, 
           err => {
             console.log(err)
         }); 
 
 
-      
+        
       }else{
         console.log("¡Sin sesión!")
       }
     })
 
   }
-
-  get ordenesLocalStorage(): Orden[]{
-    let ordenes: Orden[] =  JSON.parse(localStorage.getItem("ordenes"))
-    if(ordenes ==  null){
-      return new Array<Orden>();
-    }
-    return ordenes
-  }
-
-
-
-
 
 }

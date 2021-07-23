@@ -16,6 +16,9 @@
        
                   </div>
                   <div class="card-footer bg-transparent border-success">Estatus: <span style="color: orange;">{{ orden.estatus}}</span></div>
+                  <div *ngIf="rolUsuario==='BARTENDER' || rolUsuario==='ADMINISTRADOR'">
+                    <button *ngIf="orden.estatus === 'SERVIDA'" class="btn btn-danger">Marca como PAGADA</button>
+                  </div>
             </div>
         </div>
     </div>    

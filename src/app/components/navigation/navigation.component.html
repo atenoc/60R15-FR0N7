@@ -35,12 +35,24 @@
             <a class="nav-link" routerLink="/orden">Orden</a>
           </li> -->
 
-          <li *ngIf="user" class="nav-item" routerLinkActive="active">
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/ordenes">Ordenes</a>
           </li>
+
+          <li *ngIf="user && rolUsuario=='MESERO'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-mesero">Ordenes</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='BARTENDER'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-barra">Ordenes</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='COCINERO'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-cocina">Ordenes</a>
+          </li>
         
-          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/caja">Caja</a>
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR' || rolUsuario=='BARTENDER'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-caja">Caja</a>
           </li>
 
           <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">

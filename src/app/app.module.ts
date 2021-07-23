@@ -22,6 +22,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartaComponent } from './components/carta/carta.component';
 import { OrdenComponent } from './components/ordenes/orden/orden.component';
 import { OrdenesComponent } from './components/ordenes/ordenes-list/ordenes.component';
+import { OrdenesListBarraComponent } from './components/ordenes/ordenes-list-barra/ordenes-list-barra.component';
+import { OrdenesListCocinaComponent } from './components/ordenes/ordenes-list-cocina/ordenes-list-cocina.component';
+import { OrdenesListCajaComponent } from './components/ordenes/ordenes-list-caja/ordenes-list-caja.component';
+import { OrdenesListMeseroComponent } from './components/ordenes/ordenes-list-mesero/ordenes-list-mesero.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { OrdenesComponent } from './components/ordenes/ordenes-list/ordenes.comp
     LoginComponent,
     CartaComponent,
     OrdenComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    OrdenesListBarraComponent,
+    OrdenesListCocinaComponent,
+    OrdenesListCajaComponent,
+    OrdenesListMeseroComponent
   ],
   imports: [
     BrowserModule,

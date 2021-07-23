@@ -16,6 +16,11 @@
        
                   </div>
                   <div class="card-footer bg-transparent border-success">Estatus: <span style="color: orange;">{{ orden.estatus}}</span></div>
+                  <!-- 
+                    <span style="color: green;" *ngIf="orden.en_cocina === 'PREPARADO'"> Cocina: Listo</span> 
+                    <span style="color: green;" *ngIf="orden.en_barra === 'PREPARADO'"> Barra: Listo</span> -->
+                    <button *ngIf="orden.en_cocina === 'PREPARADO' && orden.en_barra === 'PREPARADO'" class="btn btn-danger">Marcar como SERVIDA</button>
+                  
             </div>
         </div>
     </div>    
