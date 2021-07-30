@@ -88,14 +88,14 @@ export class OrdenesListCocinaComponent implements OnInit {
     //update a variable en_cocina
     console.log("Orden a actualizar: "+JSON.stringify(orden))
     console.log("Id: "+orden._id)
-    this.ordenService.updateOrden(orden._id, orden.estatus, "PREPARADO", orden.en_barra)
+    this.ordenService.updateOrden(orden._id, orden.estatus, "COCINA_LISTA", orden.en_barra)
     .subscribe(res => {
       console.log("actualizado: "+ JSON.stringify(res));
       this.router.navigate(['/ordenes-cocina']);
       //this.router.navigateByUrl('/ordenes')
 
       this.ordenService.getOrden(orden._id).subscribe(res => {
-        if(res.en_barra === "PREPARADO" && res.en_cocina === "PREPARADO"){
+        if(res.en_barra === "BARRA_LISTA" && res.en_cocina === "COCINA_LISTA"){
           this.ordenService.updateOrden(orden._id, "PREPARADO", orden.en_cocina, orden.en_barra)
           .subscribe(res => {
           })

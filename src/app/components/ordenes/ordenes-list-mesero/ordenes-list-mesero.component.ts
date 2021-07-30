@@ -22,7 +22,7 @@ export class OrdenesListMeseroComponent implements OnInit {
     private usuarioService: UsuarioService, 
     private ordenService: OrdenService,
     private router: Router) { 
-      //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
   ngOnInit() {
@@ -79,6 +79,27 @@ export class OrdenesListMeseroComponent implements OnInit {
       }
     })
 
+  }
+
+
+  marcarServida(orden:Orden){
+    console.log("Orden a actualizar: "+JSON.stringify(orden))
+    console.log("Id: "+orden._id)
+    this.ordenService.updateOrden(orden._id, "SERVIDA", orden.en_cocina, orden.en_barra)
+    .subscribe(res => {
+      console.log("actualizado: "+ JSON.stringify(res));
+      this.router.navigate(['/ordenes-mesero']);
+      //this.router.navigateByUrl('/ordenes')
+    /*
+      this.ordenService.getOrden(orden._id).subscribe(res => {
+        if(res.en_barra === "PREPARADO" && res.en_cocina === "PREPARADO"){
+          this.ordenService.updateOrden(orden._id, "PREPARADO", orden.en_cocina, orden.en_barra)
+          .subscribe(res => {
+          })
+        }
+      })*/
+
+    });
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/models/Producto';
 import { OrdenService } from 'src/app/services/orden.service';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -32,10 +32,14 @@ export class CartaComponent implements OnInit {
   mostrarRefrescos: boolean = false;
   mostrarProductosFiltrados: boolean = false;
 
-  idmesa: number;
+  //idmesa: number;
 
-  constructor(private productoService: ProductoService, private ordenService: OrdenService, 
-    private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private productoService: ProductoService, 
+    private ordenService: OrdenService, 
+    //private activatedRoute: ActivatedRoute,  //para recuperar parámetros de URL
+    private router: Router
+    ) { }
 
   ngOnInit() {
     
@@ -81,12 +85,12 @@ export class CartaComponent implements OnInit {
         if(this.refrescos.length > 0){
           this.mostrarRefrescos = true
         }
-
+        /*
         this.activatedRoute.params.subscribe(params => {
           //this.idmesa = params['idmesa'];
           this.ordenService.orden.noMesa = params['idmesa'];
           console.log("ID MESA: "+ this.ordenService.orden.noMesa)
-        })
+        })*/
 
       },
       err => console.log(err)
@@ -96,9 +100,9 @@ export class CartaComponent implements OnInit {
   /** Orden */
 
   agregarProducto(producto: Producto){
-    this.ordenService.orden.nombreCliente="Car"
+    this.ordenService.orden.nombreCliente=""
     this.ordenService.orden.noOrden=0
-    //this.ordenService.orden.noMesa=this.idmesa
+    this.ordenService.orden.noMesa=0
     this.ordenService.orden.agregarProducto(producto)
     this.ordenService.guardarLocalStorage() 
   }

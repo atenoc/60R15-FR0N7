@@ -18,12 +18,13 @@
       <ul class="navbar-nav mr-auto">
 
           <li *ngIf="!user || user && rolUsuario=='MESERO' || user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/carta/mesa', this.ordenService.orden.noMesa]">Carta</a>
+            <!-- <a class="nav-link" [routerLink]="['/carta/mesa', this.ordenService.orden.noMesa]">Carta</a> -->
+            <a class="nav-link" routerLink="/carta">Carta</a>
           </li>
 
-          <li *ngIf="!user" 
+          <li *ngIf="user && rolUsuario=='MESERO' || rolUsuario=='ADMINISTRADOR'" 
                 class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/orden">Mi Orden 
+            <a class="nav-link" routerLink="/orden">Orden 
               <span class="rounded orden"> {{ this.ordenService.orden.detalleOrden.length }}  </span>
               <span class="total-orden"> 
                 {{ this.ordenService.orden.totalOrden == 0 ? ' ' : this.ordenService.orden.totalOrden | currency }}

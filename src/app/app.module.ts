@@ -26,6 +26,12 @@ import { OrdenesListBarraComponent } from './components/ordenes/ordenes-list-bar
 import { OrdenesListCocinaComponent } from './components/ordenes/ordenes-list-cocina/ordenes-list-cocina.component';
 import { OrdenesListCajaComponent } from './components/ordenes/ordenes-list-caja/ordenes-list-caja.component';
 import { OrdenesListMeseroComponent } from './components/ordenes/ordenes-list-mesero/ordenes-list-mesero.component';
+import { TortasComponent } from './components/carta/categorias/tortas/tortas.component';
+import { TacosComponent } from './components/carta/categorias/tacos/tacos.component';
+import { SnacksComponent } from './components/carta/categorias/snacks/snacks.component';
+import { BebidasComponent } from './components/carta/categorias/bebidas/bebidas.component';
+import { JugosComponent } from './components/carta/categorias/jugos/jugos.component';
+import { RefrescosComponent } from './components/carta/categorias/refrescos/refrescos.component';
 
 
 @NgModule({
@@ -45,7 +51,13 @@ import { OrdenesListMeseroComponent } from './components/ordenes/ordenes-list-me
     OrdenesListBarraComponent,
     OrdenesListCocinaComponent,
     OrdenesListCajaComponent,
-    OrdenesListMeseroComponent
+    OrdenesListMeseroComponent,
+    TortasComponent,
+    TacosComponent,
+    SnacksComponent,
+    BebidasComponent,
+    JugosComponent,
+    RefrescosComponent
   ],
   imports: [
     BrowserModule,

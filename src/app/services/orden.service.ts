@@ -18,7 +18,8 @@ export class OrdenService {
 
   guardarLocalStorage(){
     localStorage.setItem("ultimaOrden", JSON.stringify(this.orden))
-    console.log("Se guardó ultimaOrden en local storage: "+localStorage.getItem("ultimaOrden")) 
+    //console.log("Se guardó ultimaOrden en local storage: "+localStorage.getItem("ultimaOrden")) 
+    console.log("orden en local storage")
   }
 
   get ultimaOrden(): Orden{

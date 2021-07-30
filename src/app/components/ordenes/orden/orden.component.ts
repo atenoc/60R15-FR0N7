@@ -44,12 +44,12 @@ export class OrdenComponent implements OnInit {
     if(noComidas > 0){
       this.ordenService.orden.en_cocina = "SI"
     }else{
-      this.ordenService.orden.en_cocina = "PREPARADO"
+      this.ordenService.orden.en_cocina = "COCINA_LISTA"
     }
     if(noBebidas > 0){
       this.ordenService.orden.en_barra = "SI"
     }else{
-      this.ordenService.orden.en_barra = "PREPARADO"
+      this.ordenService.orden.en_barra = "BARRA_LISTA"
     }
 
 
