@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
   //mostrarMiOrden:boolean = false
 
   constructor(private afAuth: AngularFireAuth, private spinner: NgxSpinnerService, 
-    private router: Router, public ordenService:OrdenService, private usuarioService: UsuarioService) {}
+    private router: Router, private ordenService:OrdenService, private usuarioService: UsuarioService) {}
 
   ngOnInit() {
 
@@ -29,18 +29,18 @@ export class NavigationComponent implements OnInit {
       if(this.user){
         if(this.user.displayName){
           this.nombreEmail = this.user.displayName 
-          console.log("Nombre Usuario: "+ this.nombreEmail)
+          //console.log("Nombre Usuario: "+ this.nombreEmail)
         }else{
           this.nombreEmail = this.user.email
-          console.log("Correo Usuario: "+ this.nombreEmail)
+          //console.log("Correo Usuario: "+ this.nombreEmail)
         }
 
         /**validamos el rol del usuario logueado  */
-        console.log("Obteniendo rol...")
+        //console.log("Obteniendo rol...")
         this.usuarioService.getUsuarioXcorreo(this.user.email)
         .subscribe(
           res => {
-            console.log("res: " +res)
+            //console.log("res: " +res)
 
             if(res){
               //console.log("existe")

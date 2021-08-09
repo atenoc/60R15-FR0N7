@@ -7,17 +7,16 @@ import { OrdenService } from 'src/app/services/orden.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-ordenes',
-  templateUrl: './ordenes.component.html',
-  styleUrls: ['./ordenes.component.css']
+  selector: 'app-ordenes-list-caja',
+  templateUrl: './ordenes-list-caja.component.html',
+  styleUrls: ['./ordenes-list-caja.component.css']
 })
-export class OrdenesComponent implements OnInit {
+export class OrdenesListCajaComponent implements OnInit {
 
   listadoOrdenes:Orden[] =  new Array<Orden>()
-
   rolUsuario:string
-  //listadoOrdenesTmp:Orden[] =  new Array<Orden>()
-  listaDetalleOrdenTmp:DetalleOrden[] =  new Array<DetalleOrden>()
+  //listaDetalleOrdenTmp:DetalleOrden[] =  new Array<DetalleOrden>()
+  listadoOrdenesTmp:Orden[] =  new Array<Orden>()
 
   constructor(
     private afAuth: AngularFireAuth, 
@@ -54,17 +53,17 @@ export class OrdenesComponent implements OnInit {
 
             //Mostramos ordenes de acuerdo al perfil
 
-            if(this.rolUsuario==="ADMINISTRADOR"){
-
+            if(this.rolUsuario==="BARTENDER" || this.rolUsuario==="ADMINISTRADOR"){
+              console.log(this.rolUsuario)
+              
               this.ordenService.getOrdenes()
               .subscribe(res => {
 
-                this.listadoOrdenes = res
+                this.listadoOrdenes = res.filter(o => o.estatus === "SERVIDO")
               
               })
             }
-   
-            
+    
         }, 
           err => {
             console.log(err)
@@ -78,17 +77,5 @@ export class OrdenesComponent implements OnInit {
     })
 
   }
-
-  get ordenesLocalStorage(): Orden[]{
-    let ordenes: Orden[] =  JSON.parse(localStorage.getItem("ordenes"))
-    if(ordenes ==  null){
-      return new Array<Orden>();
-    }
-    return ordenes
-  }
-
-
-
-
 
 }
