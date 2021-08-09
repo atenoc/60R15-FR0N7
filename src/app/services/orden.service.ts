@@ -54,8 +54,8 @@ export class OrdenService {
 
   /** Rest Apis */
 
-  createOrden(noMesa: number, nombreCliente: string, en_cocina:string, en_barra:string, detalleOrden:Array<DetalleOrden>){
-    return this.http.post(`${this.URI}`, {noMesa,nombreCliente, en_cocina, en_barra, detalleOrden });  
+  createOrden(noMesa: number, nombreCliente: string, en_cocina:string, en_barra:string, creado_por:string, detalleOrden:Array<DetalleOrden>){
+    return this.http.post(`${this.URI}`, {noMesa,nombreCliente, en_cocina, en_barra, creado_por, detalleOrden });  
   }
 
   getOrdenes() {

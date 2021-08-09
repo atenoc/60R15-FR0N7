@@ -25,6 +25,9 @@
                       <div *ngIf="orden.estatus === 'SERVIDA' ">
                         <small> Estatus: </small><span style="color: #6d6d6d;"> {{ orden.estatus}} </span>
                       </div>  
+                      <div>
+                        <small style="color: cadetblue;"> Levantado por: {{ orden.creado_por}} </small>
+                      </div>  
                   </div>
                   <!-- 
                     <span style="color: green;" *ngIf="orden.en_cocina === 'PREPARADO'"> Cocina: Listo</span> 
