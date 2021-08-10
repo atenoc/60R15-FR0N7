@@ -17,38 +17,61 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
 
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/carta/mesa', this.ordenService.orden.noMesa]">Carta</a>
+          <li *ngIf="!user || user && rolUsuario=='MESERO' || user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
+            <!-- <a class="nav-link" [routerLink]="['/carta/mesa', this.ordenService.orden.noMesa]">Carta</a> -->
+            <a class="nav-link" routerLink="/carta">Carta</a>
           </li>
 
-          <li *ngIf="!user" 
+          <li *ngIf="user && rolUsuario=='MESERO' || rolUsuario=='ADMINISTRADOR'" 
                 class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/orden">Mi Orden 
+            <a class="nav-link" routerLink="/orden">Orden 
               <span class="rounded orden"> {{ this.ordenService.orden.detalleOrden.length }}  </span>
               <span class="total-orden"> 
                 {{ this.ordenService.orden.totalOrden == 0 ? ' ' : this.ordenService.orden.totalOrden | currency }}
               </span>
             </a> 
           </li> 
-        <!--
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/orden">Orden</a>
-          </li> -->
 
-          <li *ngIf="user" class="nav-item" routerLinkActive="active">
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/ordenes">Ordenes</a>
           </li>
+
+          <li *ngIf="user && rolUsuario=='MESERO'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-mesero">Ordenes</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='BARTENDER'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-barra">Ordenes</a>
+          </li>
+
+          <li *ngIf="user && rolUsuario=='COCINERO'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-cocina">Ordenes</a>
+          </li>
         
-          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/caja">Caja</a>
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR' || rolUsuario=='BARTENDER'" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/ordenes-caja">Caja</a>
           </li>
 
-          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/usuarios">Usuarios</a>
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Usuarios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/usuarios">Ver Usuarios</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/usuario-form">Agregar Usuario</a>
+            </div>
           </li>
 
-          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/productos">Productos</a>
+          <li *ngIf="user && rolUsuario=='ADMINISTRADOR'" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Productos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/productos">Ver Productos</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/producto-form">Agregar Producto</a>
+            </div>
           </li>
 
       </ul>
