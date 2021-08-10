@@ -22,6 +22,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartaComponent } from './components/carta/carta.component';
 import { OrdenComponent } from './components/ordenes/orden/orden.component';
 import { OrdenesComponent } from './components/ordenes/ordenes-list/ordenes.component';
+import { OrdenesListBarraComponent } from './components/ordenes/ordenes-list-barra/ordenes-list-barra.component';
+import { OrdenesListCocinaComponent } from './components/ordenes/ordenes-list-cocina/ordenes-list-cocina.component';
+import { OrdenesListCajaComponent } from './components/ordenes/ordenes-list-caja/ordenes-list-caja.component';
+import { OrdenesListMeseroComponent } from './components/ordenes/ordenes-list-mesero/ordenes-list-mesero.component';
+import { TortasComponent } from './components/carta/categorias/tortas/tortas.component';
+import { TacosComponent } from './components/carta/categorias/tacos/tacos.component';
+import { SnacksComponent } from './components/carta/categorias/snacks/snacks.component';
+import { BebidasComponent } from './components/carta/categorias/bebidas/bebidas.component';
+import { JugosComponent } from './components/carta/categorias/jugos/jugos.component';
+import { RefrescosComponent } from './components/carta/categorias/refrescos/refrescos.component';
 
 
 @NgModule({
@@ -37,7 +47,17 @@ import { OrdenesComponent } from './components/ordenes/ordenes-list/ordenes.comp
     LoginComponent,
     CartaComponent,
     OrdenComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    OrdenesListBarraComponent,
+    OrdenesListCocinaComponent,
+    OrdenesListCajaComponent,
+    OrdenesListMeseroComponent,
+    TortasComponent,
+    TacosComponent,
+    SnacksComponent,
+    BebidasComponent,
+    JugosComponent,
+    RefrescosComponent
   ],
   imports: [
     BrowserModule,

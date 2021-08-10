@@ -7,8 +7,60 @@
     width: 17px;
 }
 
+.my_img{
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgb(61, 61, 61);
+}
+
 .total-orden{
     margin-left: 3px;
     color: yellow;
     font-size: 8pt;
 }
+
+.img_tortas {
+    background-image: url("https://rincontapatiomx.files.wordpress.com/2016/06/torta-de-pierna.jpg");
+    background-size: cover;
+  }
+.img_tacos {
+    background-image: url("https://i2.wp.com/mas-mexico.com.mx/wp-content/uploads/2018/02/tacos-al-pastor-en-cdmx.jpg");
+    background-size: cover;
+}
+
+.img_snacks {
+    background-image: url("https://www.entremediosweb.com/v2/wp-content/uploads/2019/12/snacks.jpg");
+    background-size: cover;
+}
+
+.img_refrescos {
+    background-image: url("https://media.informabtl.com/wp-content/uploads/2017/09/marcas-de-refresco-e1504559013417.jpg");
+    background-size: cover;
+}
+
+.img_jugos {
+    background-image: url("https://thefoodtech.com/wp-content/uploads/2020/06/jugos-y-n%C3%A9ctares.jpg");
+    background-size: cover;
+}
+
+.img_bebidas {
+    background-image: url("https://revistaturismoyviajes.com/wp-content/uploads/2018/12/cerveza.jpg");
+    background-size: cover;
+}
+
+.degradado{
+    border-radius: 10px;
+    color: white;
+    height: 50%;
+    text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  }
+
+.my_texto{
+    position: absolute;
+    width: 85%;
+    top: 65%;
+    text-shadow: 2px 2px 1px black;
+}
+
+  

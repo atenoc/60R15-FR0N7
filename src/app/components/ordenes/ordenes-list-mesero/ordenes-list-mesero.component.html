@@ -1,0 +1,41 @@
+<div class="container" style="margin-top: 80px;">
+
+    <div class="row mb-5">
+        <div class="col-md-3" *ngFor="let orden of listadoOrdenes">
+            <div class="card border-success mb-3" >
+                <div class="card-header">No. Orden: {{ orden.noOrden}}</div>
+                <div class="card-body text-success">
+                    <h5 class="card-title">No. Mesa: {{orden.noMesa}}</h5>
+      
+                      <ul style="list-style-type:none;">
+                          <li *ngFor="let detalle of orden.detalleOrden">
+                              <span class="badge badge-success badge-pill">{{ detalle.cantidad }}</span>
+                              {{ detalle.nombre }}  <!-- <label style="color: red;"> {{detalle.categoria}} </label>  -->
+                          </li>
+                      </ul>  
+       
+                  </div>
+                  <div class="card-footer bg-transparent border-success">
+                      <div *ngIf="orden.estatus === 'ORDENADO' ">
+                        <small> Estatus: </small><span style="color: orange;">{{ orden.estatus}}</span>
+                      </div>
+                      <div *ngIf="orden.estatus === 'PREPARADO' ">
+                        <small> Estatus: </small><span style="color: #28a745;"><strong> {{ orden.estatus}} </strong></span>
+                      </div>
+                      <div *ngIf="orden.estatus === 'SERVIDA' ">
+                        <small> Estatus: </small><span style="color: #6d6d6d;"> {{ orden.estatus}} </span>
+                      </div>  
+                      <div>
+                        <small style="color: cadetblue;"> Levantado por: {{ orden.creado_por}} </small>
+                      </div>  
+                  </div>
+                  <!-- 
+                    <span style="color: green;" *ngIf="orden.en_cocina === 'PREPARADO'"> Cocina: Listo</span> 
+                    <span style="color: green;" *ngIf="orden.en_barra === 'PREPARADO'"> Barra: Listo</span> -->
+                    <button *ngIf="orden.estatus === 'PREPARADO'" class="btn btn-danger" (click)="marcarServida(orden)"> <small> Marcar como </small>SERVIDA</button>
+                  
+            </div>
+        </div>
+    </div>    
+
+</div>
